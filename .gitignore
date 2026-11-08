@@ -1,0 +1,11 @@
+# Abhängigkeiten und Build-Ergebnisse
+node_modules/
+dist/
+
+# Persönliche Daten aus Testläufen (Einstellungen, Spielpfad, Cache) – nie hochladen
+ForgeMod-Daten/
+
+# Sonstiges
+*.log
+.DS_Store
+Thumbs.db

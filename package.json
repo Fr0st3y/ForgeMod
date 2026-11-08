@@ -1,0 +1,39 @@
+{
+  "name": "forgemod",
+  "productName": "ForgeMod",
+  "version": "1.3.0",
+  "description": "Standalone cheat menu / trainer for The Witcher 3: Wild Hunt (single-player)",
+  "main": "boot.js",
+  "author": "Fr0st3y",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "test": "node test/w3net.test.js && node test/gamedata.test.js && node test/i18n.test.js",
+    "dist": "electron-builder --win dir && node scripts/pack.js"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "io.forgemod.trainer",
+    "copyright": "© Fr0st3y",
+    "productName": "ForgeMod",
+    "files": [
+      "boot.js",
+      "main.js",
+      "preload.js",
+      "src/**/*",
+      "games/**/*",
+      "renderer/**/*",
+      "i18n/**/*"
+    ],
+    "win": {
+      "target": "dir",
+      "icon": "build/icon.png",
+      "signAndEditExecutable": true
+    },
+    "asar": false
+  },
+  "private": true
+}

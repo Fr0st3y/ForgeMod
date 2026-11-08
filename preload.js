@@ -1,0 +1,33 @@
+'use strict';
+const { contextBridge, ipcRenderer } = require('electron');
+
+contextBridge.exposeInMainWorld('forge', {
+  listGames: () => ipcRenderer.invoke('games:list'),
+  run: (gameId, cheatId, params, enable) => ipcRenderer.invoke('cheat:run', { gameId, cheatId, params, enable }),
+  raw: (gameId, command) => ipcRenderer.invoke('cheat:raw', { gameId, command }),
+  detect: (gameId) => ipcRenderer.invoke('game:detect', { gameId }),
+  pickExe: (gameId) => ipcRenderer.invoke('game:pickExe', { gameId }),
+  launch: (gameId) => ipcRenderer.invoke('game:launch', { gameId }),
+  setSetting: (gameId, key, value) => ipcRenderer.invoke('settings:set', { gameId, key, value }),
+  setHotkey: (gameId, cheatId, accelerator) => ipcRenderer.invoke('settings:hotkey', { gameId, cheatId, accelerator }),
+  toggleFavorite: (gameId, cheatId) => ipcRenderer.invoke('settings:favorite', { gameId, cheatId }),
+  setLastGame: (gameId) => ipcRenderer.invoke('ui:lastGame', { gameId }),
+  pauseHotkeys: () => ipcRenderer.invoke('hotkeys:pause'),
+  resumeHotkeys: () => ipcRenderer.invoke('hotkeys:resume'),
+  getCatalog: (gameId) => ipcRenderer.invoke('catalog:get', { gameId }),
+  getJournal: (gameId) => ipcRenderer.invoke('journal:get', { gameId }),
+  openBestiaryWindow: () => ipcRenderer.invoke('window:bestiary'),
+  onCatalogProgress: (cb) => ipcRenderer.on('catalog:progress', (_e, c) => cb(c)),
+  imageUrl: (gameId, tex, w) => `forge-img://${gameId}/${encodeURIComponent(tex)}${w ? `?w=${w}` : ''}`,
+  updateState: () => ipcRenderer.invoke('update:state'),
+  checkUpdate: () => ipcRenderer.invoke('update:check'),
+  installUpdate: () => ipcRenderer.invoke('update:install'),
+  openUpdateFolder: () => ipcRenderer.invoke('update:openFolder'),
+  onUpdate: (cb) => ipcRenderer.on('update:state', (_e, s) => cb(s)),
+  version: () => ipcRenderer.invoke('app:version'),
+  copy: (text) => ipcRenderer.invoke('clipboard:write', text),
+  setLang: (lang) => ipcRenderer.invoke('ui:setLang', lang),
+  onStatus: (cb) => ipcRenderer.on('game:status', (_e, s) => cb(s)),
+  onLog: (cb) => ipcRenderer.on('game:log', (_e, l) => cb(l)),
+  platform: process.platform,
+});

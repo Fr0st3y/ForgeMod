@@ -1,0 +1,12 @@
+Copyright (c) 2026 Fr0st3y. All rights reserved.
+
+The source code in this repository is published for transparency and review only.
+You may view and read it, and build it for your own personal use to verify a release.
+You may not copy, modify, redistribute, re-upload or sell it, in whole or in part,
+without prior written permission from the author.
+
+Third-party components (Electron, Chromium and the npm packages listed in package-lock.json)
+are licensed under their own terms.
+
+The Witcher is a trademark of CD PROJEKT S.A. This project is a fan project and is not
+affiliated with or endorsed by CD PROJEKT RED.

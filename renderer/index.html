@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: forge-img:; script-src 'self'">
+  <title>ForgeMod</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="titlebar">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" class="brand-mark" aria-hidden="true"><path d="M12 2 3 6v6c0 5 3.8 8.8 9 10 5.2-1.2 9-5 9-10V6z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m8 12 3 3 5-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Forge<b>Mod</b></span>
+    </div>
+  </header>
+
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="side-label">Bibliothek</div>
+      <nav id="gameList" class="game-list"></nav>
+      <div class="side-foot">
+        <span id="appVersion">ForgeMod</span>
+        <div class="lang-switch" id="langSwitch" title="Sprache / Language"><button data-lang="de">DE</button><button data-lang="en">EN</button></div>
+      </div>
+      <button id="addGameBtn" class="add-game">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        Spiel hinzufügen
+      </button>
+    </aside>
+
+    <main class="main" id="main">
+      <div class="update-bar" id="updateBar" hidden>
+        <svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+        <div><b id="updateText"></b><span id="updateNotes"></span></div>
+        <button class="btn small primary" id="updateBtn"><span>Jetzt aktualisieren</span></button>
+      </div>
+      <section class="hero" id="hero">
+        <div class="hero-art" id="heroArt"></div>
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1 id="gameTitle">–</h1>
+            <div class="hero-sub" id="gameSub"></div>
+          </div>
+          <div class="hero-actions">
+            <div class="status-pill" id="statusPill"><span class="dot"></span><span id="statusText">Nicht gestartet</span></div>
+            <button class="btn primary" id="launchBtn">
+              <svg viewBox="0 0 24 24"><path d="M7 5v14l11-7z"/></svg>
+              <span>Spiel starten</span>
+            </button>
+            <button class="btn ghost icon" id="settingsBtn" title="Starteinstellungen">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="setup-banner" id="setupBanner" hidden>
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+          <div class="setup-body"><b id="setupTitle"></b><span id="setupText"></span><div id="setupGuide"></div></div>
+        </div>
+      </section>
+
+      <div class="toolbar">
+        <div class="tabs" id="tabs"></div>
+        <label class="search">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="search" type="search" placeholder="Cheats durchsuchen…" spellcheck="false">
+        </label>
+      </div>
+
+      <section class="cheats-wrap">
+        <div class="lock" id="lock">
+          <div class="lock-card">
+            <svg viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            <b id="lockTitle">Cheats gesperrt</b>
+            <span id="lockText">Starte das Spiel – sobald es erkannt wird, werden die Cheats freigeschaltet.</span>
+          </div>
+        </div>
+        <div class="cheats" id="cheats"></div>
+      </section>
+    </main>
+  </div>
+
+  <section class="console" id="console">
+    <button class="console-head" id="consoleToggle">
+      <svg viewBox="0 0 24 24"><path d="m4 17 6-6-6-6M12 19h8"/></svg>
+      <span>Konsole</span>
+      <span class="console-last" id="consoleLast"></span>
+      <svg class="chev" viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></svg>
+    </button>
+    <div class="console-body">
+      <div class="log" id="log"></div>
+      <form class="console-input" id="consoleForm">
+        <span>›</span>
+        <input id="consoleInput" placeholder="Eigenen Befehl ausführen, z. B. addmoney(500)" autocomplete="off" spellcheck="false">
+        <button class="btn small">Ausführen</button>
+      </form>
+    </div>
+  </section>
+
+  <div class="popover" id="settingsPop" hidden>
+    <h3>Starteinstellungen</h3>
+    <div class="pop-row"><label>Installation</label><div class="install" id="installInfo">Nicht gesucht</div></div>
+    <div class="pop-row btns">
+      <button class="btn small" id="detectBtn">Automatisch suchen</button>
+      <button class="btn small ghost" id="pickBtn">EXE auswählen…</button>
+    </div>
+    <div class="pop-row"><label>Normal starten</label><div id="popGuide"></div></div>
+    <div class="pop-row"><label>Startmethode</label><div class="seg" id="modeSeg"></div></div>
+    <div class="pop-row"><label>Renderer</label><div class="seg" id="rendSeg"></div></div>
+    <div class="pop-row"><label>Updates</label><div class="install" id="updateInfo">–</div></div>
+    <div class="pop-row btns">
+      <button class="btn small" id="checkUpdateBtn">Nach Updates suchen</button>
+      <button class="btn small ghost" id="updateFolderBtn">Update-Ordner</button>
+    </div>
+    <p class="pop-note"><span>„Spiel starten“ nutzt die Startoptionen</span> <code>-net -debugscripts</code><span>. Damit öffnet Witcher 3 seine eigene Debug-Schnittstelle – es werden keine Dateien im Spielordner verändert.</span></p>
+  </div>
+
+  <div class="modal" id="modal" hidden>
+    <div class="modal-card">
+      <h3 id="modalTitle"></h3>
+      <p id="modalText"></p>
+      <div class="modal-btns" id="modalBtns"></div>
+    </div>
+  </div>
+
+  <div class="modal detail" id="detail" hidden>
+    <div class="detail-card" id="detailCard"></div>
+  </div>
+
+  <div class="toasts" id="toasts"></div>
+  <script src="../i18n/en.js"></script>
+  <script src="i18n.js"></script>
+  <script src="map.js"></script>
+  <script src="gallery.js"></script>
+  <script src="bestiary.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
